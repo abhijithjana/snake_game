@@ -21,7 +21,7 @@ let score=0;
 
 function main(ctime)
 {   window.requestAnimationFrame(main);
-    music.play();
+    //music.play();
     if((ctime-lastspeed)/1000 <1/speed)
         return;
     
@@ -154,3 +154,34 @@ window.addEventListener('keydown',e=>{
             break;
     }
 })
+
+
+
+
+function moveup()
+{    
+    velocity={x:0,y:0};
+    move.play();
+    velocity.x=0;
+    velocity.y=-1;
+}
+ function movedown(){
+    velocity={x:0,y:0};
+    move.play();
+    velocity.x=0;
+    velocity.y=1;
+
+ }
+function moveleft(){
+    velocity={x:0,y:0};
+    move.play();
+    velocity.x=-1;
+    velocity.y=0;
+
+}
+function moveright(){
+    velocity={x:0,y:0};
+    move.play();
+    velocity.x=1;
+    velocity.y=0;
+}
