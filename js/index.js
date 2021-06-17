@@ -1,3 +1,5 @@
+alert("use ↑ ↓ → ← if u r using keybord also u can turn  on or off audio  using button in top right corner");
+
 let velocity ={
     x:0,
     y:0
@@ -16,12 +18,13 @@ let food={
     y:5
 };
 let score=0;
+let audios=false;
 
 
 
 function main(ctime)
 {   window.requestAnimationFrame(main);
-    //music.play();
+    
     if((ctime-lastspeed)/1000 <1/speed)
         return;
     
@@ -47,14 +50,18 @@ function gameEngine(){
 
     if(iscollide(snakarr)){
         gameOver.play();
-        music.pause();
+        if(audios){
+            music.pause();
+        }
         alert("Game Over ,press any key to continue");
         snakarr=[
             {x:13,
             y:15
             }
         ];
-        music.play();
+        if(audios){
+            music.play();
+        }
         score=0;
         scoreBox.innerHTML="score: "+score;
         speed=6;
@@ -184,4 +191,17 @@ function moveright(){
     move.play();
     velocity.x=1;
     velocity.y=0;
+}
+
+function audiop(){
+    if(audios)
+    {    audio.innerHTML="on";
+        music.pause();
+        audios=false;
+    }
+    else
+    {     audio.innerHTML="Off";
+        music.play();
+        audios=true;
+    }
 }

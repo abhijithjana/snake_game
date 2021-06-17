@@ -90,3 +90,9 @@
     top: 196px;
     right: -71px;
 }
+#audio{
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 39px;
+}
