@@ -13,12 +13,6 @@ const endGame = () => {
     alert("Game Over ,press any key to continue")
     startGame()
   }
-  if (score > highScore) {
-    highScore = score
-    console.log(highScore)
-    localStorage.setItem("highScoreBox", JSON.stringify(highScore))
-    highScoreBox.innerHTML = "HighScore :" + highScore
-  }
 }
 
 const ate = () => {
@@ -26,11 +20,19 @@ const ate = () => {
     burp.play()
     score += 1
     scoreBox.innerHTML = "score: " + score
-    if (score > highScore) {
-      highScore = score
-      console.log(highScore)
-      localStorage.setItem("highScoreBox", JSON.stringify(highScore))
-      highScoreBox.innerHTML = "HighScore :" + highScore
+    V.s += 0.5
+
+    snake.unshift({
+      x: snake[0].x + V.x,
+      y: snake[0].y + V.y,
+    })
+
+    let a = 0
+    let b = 18
+
+    food = {
+      x: Math.round(a + (b - a) * Math.random()),
+      y: Math.round(a + (b - a) * Math.random()),
     }
   }
 }
@@ -54,29 +56,27 @@ const growSnake = () => {
   })
 }
 
-const gameEngine = () => {
-  endGame()
-  ate()
-  V.s += 0.5
-  let a = 0
-  let b = 18
-  food = {
-    x: Math.round(a + (b - a) * Math.random()),
-    y: Math.round(a + (b - a) * Math.random()),
-  }
-  snake.unshift({
-    x: snake[0].x + V.x,
-    y: snake[0].y + V.y,
-  })
+let updateSnakeLoc = () => {
   for (let i = snake.length - 2; i >= 0; i--) {
     snake[i + 1] = { ...snake[i] }
   }
   snake[0].x += V.x
   snake[0].y += V.y
+}
+
+let render = () => {
   board.innerHTML = ""
+  updateSnakeLoc()
   growSnake()
   spawnFood()
-  // endGame() //If  a game has just finished, show results and prepare for next round
+}
+
+const gameEngine = () => {
+  endGame()
+  ate() //if ate ...
+
+  render()
+  allTimeHigh()
 }
 
 if (!leaderboard) {
@@ -84,4 +84,13 @@ if (!leaderboard) {
 } else {
   highScore = JSON.parse(highScoreBox)
   highScoreBox.innerHTML = "HighScore: " + highScore
+}
+
+const allTimeHigh = () => {
+  if (score > highScore) {
+    highScore = score
+    console.log(highScore)
+    localStorage.setItem("highScoreBox", JSON.stringify(highScore))
+    highScoreBox.innerHTML = "HighScore :" + highScore
+  }
 }

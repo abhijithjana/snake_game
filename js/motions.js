@@ -5,10 +5,10 @@ const willCollide = () =>
   snake[0].x <= 0 ||
   snake[0].y >= 18 ||
   snake[0].y <= 0 ||
-  euthanasia()
+  suicide()
 
 //Bugged for 2 and 1 body snake
-const euthanasia = () => {
+const suicide = () => {
   for (let i = 1; i < snake.length; i++) {
     if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true
   }
