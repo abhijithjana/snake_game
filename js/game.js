@@ -1,11 +1,3 @@
-const startGame = () => {
-  snake = [{ x: 13, y: 15 }]
-  if (audioEnabled) bgm.play()
-  score = 0
-  scoreBox.innerHTML = "score: " + score
-  V = { s: 6, x: 0, y: 0 }
-}
-
 const endGame = () => {
   if (willCollide()) {
     gameOver.play()
@@ -14,7 +6,43 @@ const endGame = () => {
     startGame()
   }
 }
+const allTimeHigh = () => {
+  if (score > highScore) {
+    highScore = score
+    console.log(highScore)
+    localStorage.setItem("highScoreBox", JSON.stringify(highScore))
+    highScoreBox.innerHTML = "HighScore :" + highScore
+  }
+}
 
+let render = () => {
+  updateSnakeLoc()
+  board.innerHTML = "" //clears board
+  ate()
+  growSnake()
+  spawnFood()
+}
+
+const gameEngine = () => {
+  endGame()
+  render()
+  allTimeHigh()
+}
+
+// if (!leaderboard)
+//   localStorage.setItem("highScoreBox", JSON.stringify(highScore))
+// else {
+//   highScore = JSON.parse(highScoreBox)
+//   highScoreBox.innerHTML = "HighScore: " + highScore
+// }
+
+const startGame = () => {
+  snake = [{ x: 13, y: 15 }]
+  if (audioEnabled) bgm.play()
+  score = 0
+  scoreBox.innerHTML = "score: " + score
+  V = { s: 6, x: 0, y: 0 }
+}
 const ate = () => {
   if (snake[0].x === food.x && snake[0].y === food.y) {
     burp.play()
@@ -27,13 +55,14 @@ const ate = () => {
       y: snake[0].y + V.y,
     })
 
-    let a = 0
+    let a = 2
     let b = 18
 
     food = {
       x: Math.round(a + (b - a) * Math.random()),
       y: Math.round(a + (b - a) * Math.random()),
     }
+    console.log(food.x, food.y)
   }
 }
 
@@ -62,35 +91,4 @@ let updateSnakeLoc = () => {
   }
   snake[0].x += V.x
   snake[0].y += V.y
-}
-
-let render = () => {
-  board.innerHTML = ""
-  updateSnakeLoc()
-  growSnake()
-  spawnFood()
-}
-
-const gameEngine = () => {
-  endGame()
-  ate() //if ate ...
-
-  render()
-  allTimeHigh()
-}
-
-if (!leaderboard) {
-  localStorage.setItem("highScoreBox", JSON.stringify(highScore))
-} else {
-  highScore = JSON.parse(highScoreBox)
-  highScoreBox.innerHTML = "HighScore: " + highScore
-}
-
-const allTimeHigh = () => {
-  if (score > highScore) {
-    highScore = score
-    console.log(highScore)
-    localStorage.setItem("highScoreBox", JSON.stringify(highScore))
-    highScoreBox.innerHTML = "HighScore :" + highScore
-  }
 }

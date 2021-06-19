@@ -1,5 +1,5 @@
 alert(
-  "use ↑ ↓ → ← if u r using keyboard also u can turn  on or off audio  using button in top right corner"
+  "use ↑ ↓ → ←  if u r using keyboard also u can turn  on or off audio  using button in top right corner Enter to pause SpaceBar to suicide"
 )
 
 function main(ctime) {
