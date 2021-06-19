@@ -11,6 +11,7 @@ const endGame = () => {
     gameOver.play()
     if (audioEnabled) bgm.pause()
     alert("Game Over ,press any key to continue")
+    startGame()
   }
   if (score > highScore) {
     highScore = score
@@ -25,6 +26,12 @@ const ate = () => {
     burp.play()
     score += 1
     scoreBox.innerHTML = "score: " + score
+    if (score > highScore) {
+      highScore = score
+      console.log(highScore)
+      localStorage.setItem("highScoreBox", JSON.stringify(highScore))
+      highScoreBox.innerHTML = "HighScore :" + highScore
+    }
   }
 }
 
@@ -48,17 +55,15 @@ const growSnake = () => {
 }
 
 const gameEngine = () => {
-  endGame() //If  a game has just finished, show results and prepare for next round
-  startGame()
+  endGame()
   ate()
-
+  V.s += 0.5
   let a = 0
   let b = 18
   food = {
     x: Math.round(a + (b - a) * Math.random()),
     y: Math.round(a + (b - a) * Math.random()),
   }
-  V.s += 0.5
   snake.unshift({
     x: snake[0].x + V.x,
     y: snake[0].y + V.y,
@@ -71,6 +76,7 @@ const gameEngine = () => {
   board.innerHTML = ""
   growSnake()
   spawnFood()
+  // endGame() //If  a game has just finished, show results and prepare for next round
 }
 
 if (!leaderboard) {
