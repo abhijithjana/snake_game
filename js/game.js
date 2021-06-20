@@ -62,7 +62,6 @@ const ate = () => {
       x: Math.round(a + (b - a) * Math.random()),
       y: Math.round(a + (b - a) * Math.random()),
     }
-    // console.log(food.x, food.y)
   }
 }
 

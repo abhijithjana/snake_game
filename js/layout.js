@@ -27,5 +27,5 @@ let food = {
 let maze = { x: 18, x0: 0, y: 18, y0: 0 }
 
 let score = 0
-let leaderboard = localStorage.getItem("hiScoreBox")
+// let leaderboard = localStorage.getItem("hiScoreBox")
 let highScore = 0

@@ -15,7 +15,7 @@ const willCollide = () => {
 }
 const suicide = () => {
   let body = {}
-  console.log("suicide", JSON.stringify(snake))
+  // console.log("suicide", JSON.stringify(snake))
   for (let i = 0, part; i < snake.length; i++) {
     part = JSON.stringify(snake[i])
     if (body[part]) return true
@@ -23,7 +23,7 @@ const suicide = () => {
   }
 }
 
-function motionUp() {
+const motionUp = () => {
   if (V.x) {
     reset()
     motion.play()
@@ -31,7 +31,7 @@ function motionUp() {
     console.log("ArrowUp")
   }
 }
-function motionDown() {
+const motionDown = () => {
   if (V.x) {
     reset()
     motion.play()
@@ -39,7 +39,8 @@ function motionDown() {
     console.log("ArrowDown")
   }
 }
-function motionLeft() {
+
+const motionLeft = () => {
   if (V.y) {
     reset()
     motion.play()
@@ -47,7 +48,7 @@ function motionLeft() {
     console.log("ArrowLeft")
   }
 }
-function motionRight() {
+const motionRight = () => {
   if (V.y) {
     reset()
     motion.play()
@@ -56,6 +57,4 @@ function motionRight() {
   }
 }
 
-function setSpeed(num) {
-  V.s = num
-}
+const setSpeed = (num) => (V.s = num)
