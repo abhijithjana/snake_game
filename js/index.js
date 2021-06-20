@@ -5,13 +5,10 @@ const main = (ctime) => {
   gameEngine()
 }
 
-alert(
-  "use ↑ ↓ → ←  if u r using keyboard also u can turn  on or off audio  using button in top right corner Enter to pause SpaceBar to suicide"
-)
+alert("use ↑ ↓ → ←  AnyKey to pause ")
 //Preload game engine
 gameEngine()
 
-//Animation Starts
 window.requestAnimationFrame(main)
 
 window.addEventListener("keydown", (e) => {
@@ -28,7 +25,12 @@ window.addEventListener("keydown", (e) => {
     case "ArrowRight":
       motionRight()
       break
+    case "m":
+      audioEnabled = !audioEnabled
+      bgmEnabler()
+      break
     default:
+      alert("Enter to Continue")
       break
   }
 })
