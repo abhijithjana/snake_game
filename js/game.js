@@ -5,7 +5,6 @@ const endGame = () => {
     alert("Game Over ,press any key to continue")
     startGame()
   }
-  else 
 }
 const allTimeHigh = () => {
   if (score > highScore) {
