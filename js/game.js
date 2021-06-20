@@ -5,6 +5,7 @@ const endGame = () => {
     alert("Game Over ,press any key to continue")
     startGame()
   }
+  else 
 }
 const allTimeHigh = () => {
   if (score > highScore) {
@@ -37,18 +38,18 @@ const gameEngine = () => {
 // }
 
 const startGame = () => {
-  snake = [{ x: 13, y: 15 }]
+  snake = babySnake() //cloning array doesnt seem to work seems to create shallow clone always..even [].concat() and map()
   if (audioEnabled) bgm.play()
   score = 0
   scoreBox.innerHTML = "score: " + score
-  V = { s: 6, x: 0, y: 0 }
+  V = initialVelocity()
 }
 const ate = () => {
   if (snake[0].x === food.x && snake[0].y === food.y) {
     burp.play()
     score += 1
     scoreBox.innerHTML = "score: " + score
-    V.s += 0.5
+    V.s += pace
 
     snake.unshift({
       x: snake[0].x + V.x,
@@ -62,23 +63,26 @@ const ate = () => {
       x: Math.round(a + (b - a) * Math.random()),
       y: Math.round(a + (b - a) * Math.random()),
     }
-    console.log(food.x, food.y)
+    // console.log(food.x, food.y)
   }
 }
 
 const spawnFood = () => {
-  FoodElement = document.createElement("div")
-  FoodElement.style.gridRowStart = food.y
-  FoodElement.style.gridColumnStart = food.x
-  FoodElement.classList.add("food")
-  board.appendChild(FoodElement)
+  foodElement = document.createElement("div")
+  foodElement.style.gridRowStart = food.y
+  foodElement.style.gridColumnStart = food.x
+  foodElement.classList.add("food")
+  board.appendChild(foodElement)
 }
 
 const growSnake = () => {
   snake.forEach((e, index) => {
     snakeElement = document.createElement("div")
-    snakeElement.style.gridRowStart = e.y
-    snakeElement.style.gridColumnStart = e.x
+    let { x, y } = e
+    if (x > maze.x) x--
+    if (y > maze.y) y--
+    snakeElement.style.gridRowStart = y
+    snakeElement.style.gridColumnStart = x
     if (index === 0) snakeElement.classList.add("head")
     else snakeElement.classList.add("snake")
     board.appendChild(snakeElement)
@@ -91,4 +95,5 @@ let updateSnakeLoc = () => {
   }
   snake[0].x += V.x
   snake[0].y += V.y
+  console.log("snake", JSON.stringify(snake))
 }

@@ -1,42 +1,59 @@
-const reset = () => (V = { s: V.s, x: 0, y: 0 })
+const reset = () => {
+  if (V.s <= 1) V.s = 6
+  V = { s: V.s, x: 0, y: 0 }
+} //ensures unidirection
 
-const willCollide = () =>
-  snake[0].x >= 18 ||
-  snake[0].x <= 0 ||
-  snake[0].y >= 18 ||
-  snake[0].y <= 0 ||
-  suicide()
-
-//Bugged for 2 and 1 body snake
+const willCollide = () => {
+  console.log(snake[0].x, snake[0].y)
+  return (
+    snake[0].x > maze.x ||
+    snake[0].x <= maze.x0 ||
+    snake[0].y > maze.y ||
+    snake[0].y <= maze.y0 ||
+    suicide()
+  )
+}
 const suicide = () => {
-  for (let i = 1; i < snake.length; i++) {
-    if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true
+  let body = {}
+  console.log("suicide", JSON.stringify(snake))
+  for (let i = 0, part; i < snake.length; i++) {
+    part = JSON.stringify(snake[i])
+    if (body[part]) return true
+    else body[part] = 1
   }
 }
 
 function motionUp() {
-  reset()
-  motion.play()
-  V.x = 0
-  V.y = -1
+  if (V.x) {
+    reset()
+    motion.play()
+    V.y = -1
+    console.log("ArrowUp")
+  }
 }
 function motionDown() {
-  reset()
-  motion.play()
-  V.x = 0
-  V.y = 1
+  if (V.x) {
+    reset()
+    motion.play()
+    V.y = 1
+    console.log("ArrowDown")
+  }
 }
 function motionLeft() {
-  reset()
-  motion.play()
-  V.x = -1
-  V.y = 0
+  if (V.y) {
+    reset()
+    motion.play()
+    V.x = -1
+    console.log("ArrowLeft")
+  }
 }
 function motionRight() {
-  reset()
-  motion.play()
-  V.x = 1
-  V.y = 0
+  if (V.y) {
+    reset()
+    motion.play()
+    V.x = 1
+    console.log("ArrowRight")
+  }
 }
 
 function setSpeed(num) {
