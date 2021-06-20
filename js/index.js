@@ -2,9 +2,11 @@ alert(
   "use ↑ ↓ → ←  if u r using keyboard also u can turn  on or off audio  using button in top right corner Enter to pause SpaceBar to suicide"
 )
 
+gameEngine() //Preload game engine
+
 function main(ctime) {
   window.requestAnimationFrame(main)
-  // if ((ctime - lastspeed) / 1000 < 1 / V.s) return
+  if ((ctime - lastspeed) / 1000 < 1 / V.s) return
   lastspeed = ctime
   gameEngine()
 }
