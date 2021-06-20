@@ -4,7 +4,7 @@ alert(
 
 function main(ctime) {
   window.requestAnimationFrame(main)
-  if ((ctime - lastspeed) / 1000 < 1 / V.s) return
+  // if ((ctime - lastspeed) / 1000 < 1 / V.s) return
   lastspeed = ctime
   gameEngine()
 }
