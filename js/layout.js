@@ -17,7 +17,7 @@ const babySnake = () => [
   { x: 11, y: 15 },
 ] */
 
-let lastspeed = 0
+let prevPace = 0
 let snake = babySnake()
 
 let food = {

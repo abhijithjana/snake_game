@@ -6,8 +6,8 @@ gameEngine() //Preload game engine
 
 function main(ctime) {
   window.requestAnimationFrame(main)
-  if ((ctime - lastspeed) / 1000 < 1 / V.s) return
-  lastspeed = ctime
+  if ((ctime - prevPace) / 1000 < 1 / V.s) return
+  prevPace = ctime
   gameEngine()
 }
 
