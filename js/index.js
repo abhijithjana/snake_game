@@ -5,6 +5,7 @@ let velocity ={
     y:0
 };
 let speed=6;
+let smoving="";
 let lastspeed=0;
 let snakarr=[
     {x:13,y:15}
@@ -38,6 +39,7 @@ function main(ctime)
 
 function iscollide(sarr){
    for (let i= 1; i< snakarr.length; i++) {
+       
         if(sarr[i].x===snakarr[0].x && sarr[i].y===snakarr[0].y)
         return true;       
    }
@@ -95,6 +97,7 @@ function gameEngine(){
             snakarr[i+1]={...snakarr[i]}
             
         }
+        
         snakarr[0].x+=velocity.x;
         snakarr[0].y+=velocity.y;
 
@@ -136,27 +139,212 @@ window.requestAnimationFrame(main);
 window.addEventListener('keydown',e=>{
     velocity={x:0,y:0};
     move.play();
+   
+    var c="true";
+    
     switch (e.key) {
         case "ArrowUp":
-                velocity.x=0;
-                velocity.y=-1;
-                console.log("ArrowUp");
+            for (let i= 1; i< snakarr.length; i++) {
+
+                if(snakarr[i].x===snakarr[0].x)
+                {
+                    c="false";
+                   
+                  
+                    
+                    
+
+                    
+
+                if(smoving==="d")
+                {  
+                    
+                    velocity.x=0;
+                    velocity.y=1;
+                    smoving="d";
+                    console.log(smoving);
+                }
+                else if(smoving==="u")
+                {    
+                    velocity.x=0;
+            velocity.y=-1;
+                console.log(smoving);
+                console.log("in");
+                }
+
+
+            }
+        }
+                
+                    
+           
+           console.log("c is "+c);
+           
+           if(c==="true")
+           {
+            velocity.x=0;
+            velocity.y=-1;
+            smoving="u";
+            console.log("ArrowDown");
+           }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                // velocity.x=0;
+                // velocity.y=-1;
+                // console.log("ArrowUp");
             break;
         case "ArrowDown":
-                velocity.x=0;
-                velocity.y=1;
-                console.log("ArrowDown");
+
+            for (let i= 1; i< snakarr.length; i++) {
+
+                if(snakarr[i].x===snakarr[0].x)
+                {
+                    c="false";
+                   
+                  
+                  
+                if(smoving==="d")
+                {  
+                   
+                    velocity.x=0;
+            velocity.y=1;
+                    smoving="d";
+                    console.log(smoving);
+                }
+                else if(smoving==="u")
+                {    
+                    velocity.x=0;
+                    velocity.y=-1;
+                console.log(smoving);
+                console.log("in");
+                }
+
+
+            }
+        }
+                
+                    
+           
+           console.log("c is "+c);
+           
+           if(c==="true")
+           {
+            velocity.x=0;
+            velocity.y=1;
+            smoving="d";
+            console.log("ArrowDown");
+           }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               
             break;
         case "ArrowLeft":
-                velocity.x=-1;
+
+               
+            for (let i= 1; i< snakarr.length; i++) {
+
+                if(snakarr[i].y===snakarr[0].y)
+                {
+                    c="false";
+                     console.log("c is "+c);
+                if(smoving==="l")
+                {  
+                    velocity.x=-1;
+                    velocity.y=0;
+                    smoving="l";
+                   
+                }
+                else if(smoving==="r")
+                {    
+                    velocity.x=1;
+                    velocity.y=0;
+                   
+                }
+
+
+            }
+                
+                    
+           }
+              if(c==="true")          
+           {
+               velocity.x=-1;
                 velocity.y=0;
-                console.log("ArrowLeft");
+                smoving="l";
+                console.log(smoving);
+           }
+
+           
             break;
         case "ArrowRight":
+          
+
+            for (let i= 1; i< snakarr.length; i++) {
+
+                if(snakarr[i].y===snakarr[0].y)
+                {
+                    c="false";
+                   
+                  
+                  
+                if(smoving==="r")
+                {  
+                   
+                    velocity.x=1;
+                velocity.y=0;
+                    smoving="r";
+                    console.log(smoving);
+                }
+                else if(smoving==="l")
+                {    
+                    velocity.x=-1;
+                velocity.y=0;
+                console.log(smoving);
+                console.log("in");
+                }
+
+
+            }
+        }
+                
+                    
+           
+           console.log("c is "+c);
+           
+           if(c==="true")
+           {
                 velocity.x=1;
                 velocity.y=0;
-                console.log("ArrowRight");
-            break;
+               smoving="r";
+                console.log(smoving);
+                console.log("in");
+           }
+                break;
         default:
             break;
     }
